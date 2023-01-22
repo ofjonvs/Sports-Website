@@ -4,15 +4,26 @@
 {% endblock %}
 {% block content %}
 
-<h1>Edit Article</h1>
-<br/><br/>
+{% if user.is_authenticated %}
+    {% if user.id == article.author.id %}
+        <h1>Edit Article</h1>
+        <br/><br/>
 
-<div class="mb-3">
-<form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button class="btn btn-secondary">Update</button>
-</form>
-</div>
+        <div class="mb-3">
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.media }}
+            {{ form.as_p }}
+            <button class="btn btn-secondary">Update</button>
+        </form>
+        </div>
+    {% else %}
+    User not authorized to access this page
+{% endif %}
+{% else %}
+User not authorized to access this page
+
+{% endif %}
+
 
 {% endblock %}
