@@ -1,0 +1,1 @@
+python3 downloads/Sports\ Website/sports_site/manage.py runserver
