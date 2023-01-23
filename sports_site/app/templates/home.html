@@ -2,7 +2,6 @@
 {% block content %}
 {% load static %}
 
-
 <style>
    
    .rowp {
@@ -62,20 +61,18 @@
     }  
     
 .article-container {
+
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     position: relative;
-    height: 1000px;
+    height: 1100px;
 }
 
 .article-container::before {
+    margin-top: -35px;
     content: "";
     position: absolute; 
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
     width: 100%;
     height: 100%;
     background-image: url('{% static "app/images/lamar-jackson-01.jpg" %}');
@@ -105,7 +102,13 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 10px 0px;
+    border-radius: 10px 10px 0px 0px;
+    
+}
+
+.article img:hover {
+    transform: scale(1.01);
+    transition: all 2 ease-in-out;
 }
 
 
@@ -134,17 +137,28 @@
     background: rgba(0, 0, 0, 0.5);
 }
 
-.article .article-link:hover {
-    transform: scale(1.5);
+.podcast-header {
+    display: flex;
+    width: 100%;
+    height: 100px;
+    background-color: #34278b;
+    color: white;
+    text-indent: 100px;
+    margin-top: -35px;
+    margin-bottom: 0;
+    align-items: center;
 }
 
-.article .article-link {
-    transition: all 0.2 ease-in-out;
+.rowp:last-of-type {
+    margin-bottom: -50px;
 }
 
 </style>
 
 </div>
+
+
+
 <div class="article-container">
     <h1>Articles</h1>
 {% for article in articles %}
@@ -161,19 +175,18 @@
     </li>
     <br/> -->
     <div class="article">
-        <a href="{% url 'article' article.pk %}" class="article-link">
-        <!-- {% if article.image %} -->
-        <img src="{{ article.image.url }}" alt="Article Image">
-        <!-- {%endif%} -->
-        <div class="article-title">{{ article.title }}</div></a>
+            <a href="{% url 'article' article.pk %}" class="article-link">
+            <!-- {% if article.image %} -->
+            <img src="{{ article.image.url }}" alt="Article Image">
+            <!-- {%endif%} -->
+            <div class="article-title">{{ article.title }}</div></a>
         <p>{{ article.snippet }}</p>
     </div>
 {% endfor %}
 </div>
 
-
+<h1 class="podcast-header">Podcast</h1>
 {% for podcast in podcasts %}
-
 <div class="rowp">
     <div class="col-3">
         <div class="video-container">
@@ -185,6 +198,7 @@
       <hr>
       <p>{{podcast.description}}</p>
       <hr>
+      <a href="{% url 'delete-podcast' podcast.pk %}"><small>(Delete)</small></a>
     </div>
 </div>
   {% endfor %}

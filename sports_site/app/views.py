@@ -15,7 +15,7 @@ class HomeView(ListView):
     def get(self, request):
         podcasts = Podcast.objects.all()
         articles = Article.objects.all()
-        return render(request, 'home.html', {'podcasts': podcasts, 'articles': articles})
+        return render(request, 'home.html', {'podcasts': podcasts[:3], 'articles': articles[:5]})
 
 class ArticleDetailView(DetailView):
     model = Article
@@ -42,4 +42,9 @@ class UpdateArticleView(UpdateView):
 class DeleteArticleView(DeleteView):
     model = Article
     template_name = 'delete_article.html'
+    success_url = reverse_lazy('home')
+
+class DeletePodcastView(DeleteView):
+    model = Podcast
+    template_name = 'delete_podcast.html'
     success_url = reverse_lazy('home')

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %} 
+    Delete Article
+{% endblock %}
+{% block content %}
+
+{% if user.is_superuser %}
+        <h1>Delete Podcast</h1>
+        <br/><br/>
+        <h3>Delete: {{ podcast.title }}</h3>
+
+        <div class="mb-3">
+        <form method="POST">
+            {% csrf_token %}
+            <strong>Confirm Podcast Delete</strong> (This will only delete the link from this site. The video will remain up on YouTube.) <br><br/>
+            <button class="btn btn-danger">Delete</button>
+            <a href="{% url 'home' %}" class="btn btn-secondary">Back</a>
+        </form>
+        </div>
+{% else %}
+User not authorized to access this page
+
+{% endif %}
+
+{% endblock %}
