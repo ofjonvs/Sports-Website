@@ -24,7 +24,7 @@
 {% for podcast in podcasts %}
 <div class="video-container">
     <iframe src="https://www.youtube.com/embed/{{ podcast.url }}" frameborder="0" allowfullscreen></iframe>
-    <div class="video-description">{{ video.description }}</div>
+    <div class="video-description">{{ podcast.description }}</div>
 </div>
 {% endfor %}
 

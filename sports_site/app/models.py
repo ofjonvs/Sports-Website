@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from datetime import datetime, date
 from ckeditor.fields import RichTextField
+import re
 
 
 class Article(models.Model):
@@ -27,6 +28,11 @@ class Podcast(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
     # video = models.VideoField()
+
+    def save(self, *args, **kwargs):
+        match = re.search(r'(?<=v=)[^&#]+', self.url)
+        self.url = match.group(0) 
+        super(Podcast, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.title
