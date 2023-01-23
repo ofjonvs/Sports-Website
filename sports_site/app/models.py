@@ -4,6 +4,7 @@ from django.urls import reverse
 from datetime import datetime, date
 from ckeditor.fields import RichTextField
 import re
+from urllib.parse import urlparse, parse_qs
 
 
 class Article(models.Model):
@@ -30,9 +31,9 @@ class Podcast(models.Model):
     # video = models.VideoField()
 
     def save(self, *args, **kwargs):
-        match = re.search(r'(?<=v=)[^&#]+', self.url)
-        if match:
-            self.url = match.group(0) 
+        
+        parsed_url = urlparse(self.url)
+        self.url = parse_qs(parsed_url.query)['v'][0]
         super(Podcast, self).save(*args, **kwargs)
 
     def __str__(self):

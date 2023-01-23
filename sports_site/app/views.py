@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Article, Podcast
-from .forms import ArticleForm, EditArticleForm
+from .forms import ArticleForm, EditArticleForm, PodcastForm
 from django.urls import reverse_lazy
 
 # def home(request):
@@ -27,6 +27,11 @@ class AddArticleView(CreateView):
     template_name = 'add_article.html'
     # fields = '__all__'
     # fields = ('title', 'body')
+
+class AddPodcastView(CreateView):
+    model = Podcast
+    form_class = PodcastForm
+    template_name = 'add_podcast.html'
 
 class UpdateArticleView(UpdateView):
     model = Article

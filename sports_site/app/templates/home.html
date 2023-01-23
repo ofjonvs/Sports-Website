@@ -8,8 +8,11 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    /* padding: 0px -400px; */
-    width: 100%;
+    /* width: 100% !important; */
+    margin-left: 0;
+    margin-right: 0;
+    align-self: center;
+    height: 800px;
    }
 
     .video-container {
@@ -18,10 +21,10 @@
         height: 0;
         width: 100%;
         overflow: hidden;
-        transform: scale(2.5);
+        transform: scale(2);
         box-shadow: 0px 0px 50px 0px rgba(0,0,0,2);
         /* margin-right: 100px; */
-        margin-left: 200px;
+        margin-left: 300px;
     }
     .video-container iframe {
         position: absolute;
@@ -38,7 +41,7 @@
     /* Add styles for the title and description */
     .col-4 {
         text-align: center; /* Center the text */
-        padding: 100px 100px; /* Add some padding */
+        padding: 80px 80px; /* Add some padding */
         /* margin-left: 300px; */
         margin-right: 100px;
         color: white;
@@ -75,9 +78,9 @@
     <br/>
 {% endfor %}
 </ul>
-
-{% for podcast in podcasts %}
 <br/><br/><br/><br/><br/>
+{% for podcast in podcasts %}
+
 <div class="rowp">
     <div class="col-3">
         <div class="video-container">

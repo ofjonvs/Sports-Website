@@ -1,5 +1,5 @@
 from django import forms
-from .models import Article
+from .models import Article, Podcast
 
 class ArticleForm(forms.ModelForm):
     class Meta:
@@ -23,4 +23,14 @@ class EditArticleForm(forms.ModelForm):
             'title_tag': forms.TextInput(attrs={'class': 'form-control'}),
             'body': forms.Textarea(attrs={'class': 'form-control'}),
             'snippet': forms.Textarea(attrs={'class': 'form-control'}),                       
+        }
+
+class PodcastForm(forms.ModelForm):
+    class Meta:
+        model = Podcast
+        fields = '__all__'
+        widgets = {
+            'title': forms.TextInput(attrs={'class': 'form-control'}),
+            'url': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter full YouTube URL'}),
+            'description': forms.Textarea(attrs={'class': 'form-control'}),
         }
