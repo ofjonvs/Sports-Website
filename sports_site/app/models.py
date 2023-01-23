@@ -4,6 +4,7 @@ from django.urls import reverse
 from datetime import datetime, date
 from ckeditor.fields import RichTextField
 
+
 class Article(models.Model):
     title = models.CharField(max_length=255)
     header_image = models.ImageField(null=True, blank=True, upload_to='images/')
@@ -22,5 +23,10 @@ class Article(models.Model):
         return reverse('home')
 
 class Podcast(models.Model):
-    url = models.CharField(max_length=255)
+    url = models.URLField()
+    title = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
+    # video = models.VideoField()
+
+    def __str__(self):
+        return self.title

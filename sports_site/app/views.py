@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from .models import Article
+from .models import Article, Podcast
 from .forms import ArticleForm, EditArticleForm
 from django.urls import reverse_lazy
 
@@ -12,6 +12,10 @@ class HomeView(ListView):
     model = Article
     template_name = 'home.html'
     ordering = ['-article_date']
+    def get(self, request):
+        podcasts = Podcast.objects.all()
+        articles = Article.objects.all()
+        return render(request, 'home.html', {'podcasts': podcasts, 'articles': articles})
 
 class ArticleDetailView(DetailView):
     model = Article
