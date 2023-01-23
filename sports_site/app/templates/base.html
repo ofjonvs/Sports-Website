@@ -1,0 +1,150 @@
+ {% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %} 
+            Main Title
+        {% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  </head>
+  <body>
+    <main>
+    <nav class="navbar navbar-expand-lg" style="background-color: darkslateblue;" data-bs-theme="dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="{% url 'home' %}">Logo</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              
+              {% if user.is_authenticated %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'new-article' %}">New Article</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'edit_profile' %}">Edit Profile</a>
+              </li>
+              {% else %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'register' %}">Register</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'login' %}">Login</a>
+              </li>
+              {% endif %}
+              <li class="nav-item sm" style="display: flex; align-items: center">
+              <a href="#">
+                <img src="{% static 'app/images/icons8-instagram-96.png' %}" alt="Instagram" width="40">
+              </a>
+            </li>
+              <li class="nav-item sm" style="display: flex; align-items: center"></li>
+              <a href="#">
+                <img src="{% static 'app/images/icons8-youtube-96.png' %}" alt="Youtube" width="40">
+              </a>
+            </li>
+              <li class="nav-item sm spotify" style="display: flex; align-items: center">
+              <a href="#">
+                <img src="{% static 'app/images/icons8-spotify-50.png' %}" alt="Spotify" width="30">
+              </a>
+            </li>
+
+            <style>
+              .sm {
+                  margin-left: 20px;
+              } 
+              .spotify {
+                margin-left: 30px;
+              }
+            </style>
+              
+            </ul>
+            {% if user.is_authenticated %}
+            <span class="navbar-text">
+              Welcome, {{ user.username }}
+            </span>
+            {%endif%}
+          </div>
+        </div>
+      </nav>
+
+    <br/>
+
+
+    <div class="container">
+    {% block content %}
+
+    {% endblock %}
+    </div>
+  </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
+    <footer class="footer bg-dark text-white py-3">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <a href="#">
+              <img src="{% static 'app/images/icons8-instagram-96.png' %}" alt="Instagram" width="40">
+            </a>
+          </div>
+          <div class="col-md-4">
+            <a href="#">
+              <img src="{% static 'app/images/icons8-youtube-96.png' %}" alt="Youtube" width="40">
+            </a>
+          </div>
+          <div class="col-md-4">
+            <a href="#">
+              <img src="{% static 'app/images/icons8-spotify-50.png' %}" alt="Spotify" width="30">
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  <style>
+
+body {
+  display: grid;
+    grid-template-rows: 1fr auto;
+    min-height: 100vh;
+}
+
+footer {
+  bottom: 0;
+  width: 100%;
+  left: 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  left: 0;
+  margin-top: auto;
+}
+
+main {
+  padding-bottom: 50px; /* same height as the footer */
+}
+
+  .social-media-logos {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.social-media-logos a {
+    margin: 0 10px;
+    font-size: 2em;
+    color: #fff;
+}
+  </style>
+    </body>
+</html>

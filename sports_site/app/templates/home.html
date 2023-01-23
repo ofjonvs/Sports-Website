@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Articles</h1>
+
+<ul>
+{% for article in object_list %}
+    <li><a href="{% url 'article' article.pk %}">{{ article.title }}</a> - {{ article.author.first_name }} {{ article.author.last_name }} - {{ article.article_date }}
+        {% if user.is_authenticated %}
+        {% if user.id == article.author.id %}
+        - 
+        <small><a href="{% url 'update-article' article.pk %}">(Edit)</a></small>
+        <small><a href="{% url 'delete-article' article.pk %}">(Delete)</a></small>
+        {% endif %}
+        {% endif %}
+        <br/>
+    {{ article.snippet }}
+    <!-- {{ article.body|slice:"200"|safe }} -->
+    </li>
+    <br/>
+{% endfor %}
+</ul>
+
+{% endblock %}

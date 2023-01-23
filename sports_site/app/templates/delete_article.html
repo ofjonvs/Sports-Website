@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %} 
+    Delete Article
+{% endblock %}
+{% block content %}
+
+{% if user.is_authenticated %}
+    {% if user.id == article.author.id %}
+        <h1>Delete Article</h1>
+        <br/><br/>
+        <h3>Delete: {{ article.title }}</h3>
+
+        <div class="mb-3">
+        <form method="POST">
+            {% csrf_token %}
+            <strong>Confirm Article Delete</strong> <br><br/>
+            <button class="btn btn-danger">Delete</button>
+            <a href="{% url 'home' %}" class="btn btn-secondary">Back</a>
+        </form>
+        </div>
+    {% else %}
+    User not authorized to access this page
+    {% endif %}
+{% else %}
+User not authorized to access this page
+
+{% endif %}
+
+{% endblock %}
