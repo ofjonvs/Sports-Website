@@ -1,6 +1,61 @@
 {% extends 'base.html' %}
 {% block content %}
 
+<style>
+   
+   .rowp {
+    background: linear-gradient(45deg, #241773 50%, #34278b 50%);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* padding: 0px -400px; */
+    width: 100%;
+   }
+
+    .video-container {
+        position: relative;
+        padding-bottom: 56.25%; 
+        height: 0;
+        width: 100%;
+        overflow: hidden;
+        transform: scale(2.5);
+        box-shadow: 0px 0px 50px 0px rgba(0,0,0,2);
+        /* margin-right: 100px; */
+        margin-left: 200px;
+    }
+    .video-container iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+        
+    }
+    
+   
+    
+    /* Add styles for the title and description */
+    .col-4 {
+        text-align: center; /* Center the text */
+        padding: 100px 100px; /* Add some padding */
+        /* margin-left: 300px; */
+        margin-right: 100px;
+        color: white;
+    }
+    h2 {
+        font-size: 24px; /* Increase the font size */
+        margin-bottom: 10px; /* Add some margin below the title */
+    }
+    hr {
+        width: 50%; /* Make the horizontal rule 50% of the container width */
+        margin: 20px auto; /* Center the horizontal rule */
+    }
+    p {
+        font-size: 18px; /* Increase the font size of the description */
+    }   
+</style>
+
 <h1>Articles</h1>
 
 <ul>
@@ -22,10 +77,20 @@
 </ul>
 
 {% for podcast in podcasts %}
-<div class="video-container">
-    <iframe src="https://www.youtube.com/embed/{{ podcast.url }}" frameborder="0" allowfullscreen></iframe>
-    <div class="video-description">{{ podcast.description }}</div>
+<br/><br/><br/><br/><br/>
+<div class="rowp">
+    <div class="col-3">
+        <div class="video-container">
+        <iframe width="100" src="https://www.youtube.com/embed/{{ podcast.url }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+    </div>
+    <div class="col-4">
+      <h2>{{podcast.title}}</h2>
+      <hr>
+      <p>{{podcast.description}}</p>
+      <hr>
+    </div>
 </div>
-{% endfor %}
+  {% endfor %}
 
 {% endblock %}

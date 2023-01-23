@@ -24,14 +24,15 @@ class Article(models.Model):
         return reverse('home')
 
 class Podcast(models.Model):
-    url = models.URLField()
+    url = models.CharField(max_length=500)
     title = models.CharField(max_length=255)
-    description = models.TextField(blank=True, null=True)
+    description = models.TextField(max_length=500 ,blank=True, null=True)
     # video = models.VideoField()
 
     def save(self, *args, **kwargs):
         match = re.search(r'(?<=v=)[^&#]+', self.url)
-        self.url = match.group(0) 
+        if match:
+            self.url = match.group(0) 
         super(Podcast, self).save(*args, **kwargs)
 
     def __str__(self):
