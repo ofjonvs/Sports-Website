@@ -21,3 +21,6 @@ class Article(models.Model):
         # return reverse('article', args=(str(self.id)))        
         return reverse('home')
 
+class Podcast(models.Model):
+    url = models.CharField(max_length=255)
+    description = models.TextField(blank=True, null=True)
