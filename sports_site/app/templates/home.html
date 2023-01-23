@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
+{% load static %}
 
 
 <style>
@@ -57,14 +58,97 @@
     }
     p {
         font-size: 18px; /* Increase the font size of the description */
-    }   
+
+    }  
+    
+.article-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    position: relative;
+    height: 1000px;
+}
+
+.article-container::before {
+    content: "";
+    position: absolute; 
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('{% static "app/images/lamar-jackson-01.jpg" %}');
+    filter: opacity(0.3) grayscale(100%);
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: -1;
+}
+
+
+.article {
+    width: 300px;
+    height: 300px;
+    margin-top: 100px;
+    /* margin-bottom: -25px; */
+    margin: 50px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    /* padding-bottom: 5px; */
+    /* margin-bottom: -300px; */
+    /* padding-top: 100px; */
+    /* overflow: hidden; */
+}
+
+.article img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px 0px;
+}
+
+
+.article h2 {
+    font-size: 24px;
+    margin-top: 10px;
+}
+
+.article p {
+    font-size: 18px;
+    margin-top: 10px;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    height: 110px;
+    /* padding-bottom: 300px; */
+}
+
+.article .article-title {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+    color: white;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.article .article-link:hover {
+    transform: scale(1.5);
+}
+
+.article .article-link {
+    transition: all 0.2 ease-in-out;
+}
+
 </style>
 
-<h1>Articles</h1>
-
-<ul>
+</div>
+<div class="article-container">
+    <h1>Articles</h1>
 {% for article in articles %}
-    <li><a href="{% url 'article' article.pk %}">{{ article.title }}</a> - {{ article.author.first_name }} {{ article.author.last_name }} - {{ article.article_date }}
+    <!-- <li><a href="{% url 'article' article.pk %}">{{ article.title }}</a> - {{ article.author.first_name }} {{ article.author.last_name }} - {{ article.article_date }}
         {% if user.is_authenticated %}
         {% if user.id == article.author.id %}
         - 
@@ -74,13 +158,20 @@
         {% endif %}
         <br/>
     {{ article.snippet }}
-    <!-- {{ article.body|slice:"200"|safe }} -->
     </li>
-    <br/>
+    <br/> -->
+    <div class="article">
+        <a href="{% url 'article' article.pk %}" class="article-link">
+        <!-- {% if article.image %} -->
+        <img src="{{ article.image.url }}" alt="Article Image">
+        <!-- {%endif%} -->
+        <div class="article-title">{{ article.title }}</div></a>
+        <p>{{ article.snippet }}</p>
+    </div>
 {% endfor %}
-</ul>
-<br/><br/><br/><br/><br/>
 </div>
+
+
 {% for podcast in podcasts %}
 
 <div class="rowp">

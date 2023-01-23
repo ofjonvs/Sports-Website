@@ -4,7 +4,7 @@ from .models import Article, Podcast
 class ArticleForm(forms.ModelForm):
     class Meta:
         model = Article
-        fields = ('title', 'title_tag', 'author', 'body', 'snippet', 'header_image')
+        fields = ('title', 'title_tag', 'author', 'body', 'snippet', 'image')
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
             'title_tag': forms.TextInput(attrs={'class': 'form-control'}),
@@ -17,7 +17,7 @@ class ArticleForm(forms.ModelForm):
 class EditArticleForm(forms.ModelForm):
     class Meta:
         model = Article
-        fields = ('title', 'title_tag', 'body')
+        fields = ('title', 'title_tag', 'body', 'snippet', 'image')
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
             'title_tag': forms.TextInput(attrs={'class': 'form-control'}),

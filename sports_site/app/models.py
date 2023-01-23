@@ -9,13 +9,13 @@ from urllib.parse import urlparse, parse_qs
 
 class Article(models.Model):
     title = models.CharField(max_length=255)
-    header_image = models.ImageField(null=True, blank=True, upload_to='images/')
+    image = models.ImageField(upload_to='images/')
     title_tag = models.CharField(max_length=255)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     # body = models.TextField()
     body = RichTextField(blank=True, null=True)
     article_date = models.DateField(auto_now_add=True)
-    snippet = models.CharField(max_length=255)
+    snippet = models.CharField(max_length=200, blank=True, null=True)
 
     def __str__(self):
         return self.title + ' | ' + str(self.author)
