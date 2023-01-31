@@ -1,2 +1,2 @@
-python3 -m pip install django-ckeditor
-python3 downloads/Sports\ Website/sports_site/manage.py runserver
+source ~/Sports-Website-master/virt/bin/activate
+python3 Sports-Website-master/sports_site/manage.py runserver
